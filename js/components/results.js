@@ -2,7 +2,7 @@ import React from 'react';
 import { searchResultItem, addInfo } from '../../styles/results.scss';
 
 let createUrl = (id) => {
-	return 'https://white-label-react.herokuapp.com/images/medium/' + id + '.jpg';  //  use  ES2015 template
+	return 'https://white-label-elements.herokuapp.com/images/medium/' + id + '.jpg';  //  use  ES2015 template
 }
 
 export default class Results extends React.Component {
