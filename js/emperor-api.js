@@ -1,5 +1,5 @@
 
-const API_URL = 'http://localhost:3000/api/emperors';
+const API_URL = 'https://white-label-api.herokuapp.com/api/emperors';
 
 class EmperorAPI {
 
