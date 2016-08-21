@@ -1,6 +1,6 @@
 import {Link} from 'react-router';
 import React from 'react';
-import { aside, content } from '../../../elements/layout/main.css';
+import { aside, content } from '../../styles/layout.scss';
 import emperorAPI from '../emperor-api';
 import store from '../store';
 import { connect } from 'react-redux';
