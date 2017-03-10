@@ -12,6 +12,8 @@ import getQueryStringFromModel from '../get-query-string';
 
 class Home extends React.Component {
 
+	toFlag = true;
+
 	constructor () {
 
 		super();
@@ -23,7 +25,13 @@ class Home extends React.Component {
 	}
 
 	componentDidMount() {
-		emperorAPI.load().then( data => {
+
+		/*
+			We need to get the query params here, then we need to load accordingly.
+		*/
+
+		emperorAPI.load(window.location.search).then( data => {
+
 			store.dispatch(criteriaActions.initial(data.criteria));
 			store.dispatch(resultsAction(data.results));
 		});
@@ -40,6 +48,7 @@ class Home extends React.Component {
 	}
 
 	handleYearFromChange (event) {
+		console.log('handler year from', event.target.value);
 		store.dispatch(criteriaActions.yearFrom(event.target.value));
 		this.updateResults();
 	}
@@ -50,10 +59,9 @@ class Home extends React.Component {
 	}
 
 	updateResults() {
+
 		let queryString = getQueryStringFromModel(store.getState().criteriaState);
-		emperorAPI.load(queryString).then( data => {
-			store.dispatch(resultsAction(data.results));
-		});
+		window.location.search = queryString;
 	}
 
 	render () {

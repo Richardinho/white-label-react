@@ -28686,6 +28686,8 @@
 
 	var _banner = __webpack_require__(271);
 
+	var _reactRouter = __webpack_require__(9);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (props) {
@@ -28696,8 +28698,8 @@
 				'h1',
 				null,
 				_react2.default.createElement(
-					'a',
-					null,
+					_reactRouter.Link,
+					{ to: "/" },
 					'Emperors of Rome'
 				)
 			)
@@ -28860,6 +28862,9 @@
 
 			var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
+			_this.toFlag = true;
+
+
 			_this.handleDynastyChange = _this.handleDynastyChange.bind(_this);
 			_this.handleSortOrderChange = _this.handleSortOrderChange.bind(_this);
 			_this.handleYearFromChange = _this.handleYearFromChange.bind(_this);
@@ -28870,7 +28875,13 @@
 		_createClass(Home, [{
 			key: 'componentDidMount',
 			value: function componentDidMount() {
-				_emperorApi2.default.load().then(function (data) {
+
+				/*
+	   	We need to get the query params here, then we need to load accordingly.
+	   */
+
+				_emperorApi2.default.load(window.location.search).then(function (data) {
+
 					_store2.default.dispatch(_criteriaActions2.default.initial(data.criteria));
 					_store2.default.dispatch((0, _resultsAction2.default)(data.results));
 				});
@@ -28890,6 +28901,7 @@
 		}, {
 			key: 'handleYearFromChange',
 			value: function handleYearFromChange(event) {
+				console.log('handler year from', event.target.value);
 				_store2.default.dispatch(_criteriaActions2.default.yearFrom(event.target.value));
 				this.updateResults();
 			}
@@ -28902,10 +28914,9 @@
 		}, {
 			key: 'updateResults',
 			value: function updateResults() {
+
 				var queryString = (0, _getQueryString2.default)(_store2.default.getState().criteriaState);
-				_emperorApi2.default.load(queryString).then(function (data) {
-					_store2.default.dispatch((0, _resultsAction2.default)(data.results));
-				});
+				window.location.search = queryString;
 			}
 		}, {
 			key: 'render',
@@ -29227,12 +29238,10 @@
 						'from'
 					),
 					_react2.default.createElement('input', { id: 'year-from',
-						type: 'range',
-						step: '1',
+						type: 'number',
 						min: props.minYear,
 						max: props.maxYear,
-						value: props.yearFrom,
-						onChange: props.handleYearFromChange
+						onBlur: props.handleYearFromChange
 					}),
 					_react2.default.createElement(
 						'label',
@@ -29249,12 +29258,10 @@
 						'to'
 					),
 					_react2.default.createElement('input', { id: 'year-to',
-						type: 'range',
-						step: '1',
+						type: 'number',
 						min: props.minYear,
 						max: props.maxYear,
-						value: props.yearTo,
-						onChange: props.handleYearToChange
+						onBlur: props.handleYearToChange
 					}),
 					_react2.default.createElement(
 						'label',
@@ -29500,7 +29507,7 @@
 		return queryParams.reduce(function (memo, key, index) {
 			var amper = index > 0 ? '&' : '';
 			return memo + amper + (0, _decamelize2.default)(key, '-') + '=' + criteria[key];
-		}, '?');
+		}, '');
 	};
 
 /***/ },
@@ -29594,8 +29601,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(9);
-
 	var _emperorApi = __webpack_require__(276);
 
 	var _emperorApi2 = _interopRequireDefault(_emperorApi);
@@ -29643,11 +29648,6 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: _emperor.emperorArticle },
-					_react2.default.createElement(
-						_reactRouter.Link,
-						{ to: '/' },
-						'home'
-					),
 					_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: this.state.data } })
 				);
 			}

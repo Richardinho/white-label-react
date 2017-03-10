@@ -12,24 +12,20 @@ export default (props) => {
 				<li className={ rangeFilters }>
 					<label htmlFor='year-from'>from</label>
 					<input id='year-from'
-								 type='range'
-								 step='1'
+								 type='number'
 								 min={ props.minYear }
 								 max={ props.maxYear }
-								 value={ props.yearFrom }
-								 onChange={ props.handleYearFromChange }
+								 onBlur={ props.handleYearFromChange }
 								 />
 					<label htmlFor='year-from'>{ props.yearFrom }</label>
 				</li>
 				<li className={ rangeFilters }>
 					<label htmlFor='year-to'>to</label>
 					<input id='year-to'
-								 type='range'
-								 step='1'
+								 type='number'
 								 min={ props.minYear }
 								 max={ props.maxYear }
-								 value={ props.yearTo }
-								 onChange={ props.handleYearToChange }
+								 onBlur={ props.handleYearToChange }
 								 />
 					<label htmlFor='year-to'>{ props.yearTo }</label>
 				</li>

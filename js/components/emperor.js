@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import emperorAPI from '../emperor-api';
 import { emperorArticle } from '../../styles/emperor.scss';
 
@@ -28,9 +27,7 @@ export default class Emperor extends React.Component {
 	render () {
 		return (
 			<div className={ emperorArticle }>
-				<Link to="/" >home</Link>
 				<div dangerouslySetInnerHTML={{__html: this.state.data }}></div>
-
 			</div>
 		);
 	}

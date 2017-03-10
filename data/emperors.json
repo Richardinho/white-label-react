@@ -114,19 +114,22 @@
     "id" : 20,
     "name" : "Septimius Severus",
     "from" : 193,
-    "to" : 211
+    "to" : 211,
+    "dynasty" : "Severan"
 
   },{
     "id" : 21,
     "name" : "Caracalla",
     "from" : 198,
-    "to" : 217
+    "to" : 217,
+    "dynasty" : "Severan"
   },
   {
     "id" : 22,
     "name" : "Geta",
     "from" : 209,
-    "to" : 211
+    "to" : 211,
+    "dynasty" : "Severan"
   },
   {
     "id": 23,
@@ -145,13 +148,15 @@
     "id": 25,
     "name": "Elagabalus",
     "from": 218,
-    "to" : 222
+    "to" : 222,
+    "dynasty" : "Severan"
   }
   ,{
     "id": 26,
     "name": "Severus Alexander",
     "from": 222,
-    "to" : 235
+    "to" : 235,
+    "dynasty" : "Severan"
   },{
     "id": 27,
     "name" : "Maximinus Thrax",
@@ -171,12 +176,14 @@
     "id": 30,
     "name" : "Gordian I",
     "from" : 238,
-    "to" : 238
+    "to" : 238,
+    "dynasty" : "Gordian"
   },{
     "id": 31,
     "name" : "Gordian II",
     "from" : 238,
-    "to" : 238
+    "to" : 238,
+    "dynasty" : "Gordian"
   },{
     "id": 32,
     "name" : "Gordian III",

@@ -11,5 +11,5 @@ export default criteria => {
 	return queryParams.reduce(function (memo, key, index) {
 		var amper = (index > 0) ? '&' : '';
 		return memo + amper + decamelize(key, '-') + '=' + criteria[key];
-	}, '?');
+	}, '');
 };
