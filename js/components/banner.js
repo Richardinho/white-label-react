@@ -5,7 +5,7 @@ export default (props) => {
 	return (
 		<div className={ banner }>
 			<h1>
-				<a>Whitey Label</a>
+				<a>Emperors of Rome</a>
 			</h1>
 		</div>
 	);

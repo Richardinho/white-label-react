@@ -45,7 +45,7 @@ class Home extends React.Component {
 	}
 
 	handleYearToChange (event) {
-		store.dispatch(criteriaActions.yearTo(to));
+		store.dispatch(criteriaActions.yearTo(event.target.value));
 		this.updateResults();
 	}
 
@@ -57,7 +57,6 @@ class Home extends React.Component {
 	}
 
 	render () {
-		console.log('render', this.props.criteria);
 		return (
 			<div className='clearfix'>
 				<div className={ aside }>

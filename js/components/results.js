@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import { searchResultItem, addInfo } from '../../styles/results.scss';
 
 let createUrl = (id) => {
@@ -11,20 +12,22 @@ export default class Results extends React.Component {
 		return (
 			<ol>
 				{this.props.results.map((result) => {
-						return (
-							<li key={ result.id }>
+					return (
+						<li key={ result.id }>
+							<Link to={ "/emperor/" + result.id }>
 								<div className={[searchResultItem, 'media'].join(' ')}>
-									<a className='media-image'>
+									<div className='media-image'>
 										<img alt="" src={ createUrl(result.id)}/>
-									</a>
+									</div>
 									<div className="media-body">
-										<h3><a data-internal-link href="/emperor?id={ result.id }">{ result.name }</a></h3>
+										<h3>{ result.name }</h3>
 										<div className={ addInfo }>{ result.from } { result.to }
 										</div>
 									</div>
 								</div>
-							</li>
-						)
+							</Link>
+						</li>
+					)
 				})}
 			</ol>
 		);

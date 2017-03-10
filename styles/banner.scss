@@ -3,10 +3,10 @@
 .banner {
 	font-size : 20px;
 	border-bottom : solid 2px $border-color;
-	background : lighten( $base-color, 48% );
+	background : darken( purple, 14% );
 	position : relative;
 	box-sizing : content-box;
-
+	// this wont work when scroll bar is present :(
 	&:before,
 	&:after {
 		border-bottom : solid 2px $border-color;
@@ -29,15 +29,27 @@
 		line-height : 1;
 		font-size : 2em;
 		color : $text-color;
-		padding : .5em 0;
-		text-align : right;
+		padding : .5em;
+
 		a {
 			text-decoration : none;
-			color : inherit;
+			color : white;
 		}
 	}
 }
 
+@media only screen and (min-device-width : 1200px) {
+
+	.banner {
+
+		h1 {
+			text-align : right;
+		}
+
+
+	}
+
+}
 
 
 

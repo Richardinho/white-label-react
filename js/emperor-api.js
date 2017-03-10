@@ -1,12 +1,21 @@
 
-const API_URL = 'https://white-label-api.herokuapp.com/api/emperors';
+let apiURL = '/api';
 
 class EmperorAPI {
 
 	load (queryString = '') {
-		return fetch(API_URL + queryString).then(function (response) {
+
+		return fetch(apiURL + '/emperors' + queryString).then(function (response) {
 			return response.json()
 		});
+	}
+
+	loadEmperor (id) {
+
+		return fetch(apiURL + '/emperor?id=' + id).then(function (response) {
+			return response.text();
+		});
+
 	}
 }
 

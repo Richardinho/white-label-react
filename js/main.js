@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import Layout from './layout';
 import Home from './components/home';
 import Other from './components/other';
+import Emperor from './components/emperor';
 import store from './store';
 
 let router = (
@@ -17,6 +18,7 @@ let router = (
 		<Route component={ Layout }>
 			<Route path="/" component={ Home }/>
 			<Route path="/other" component={ Other }/>
+			<Route path="/emperor/:id" component={ Emperor }/>
 		</Route>
 	</Router>
 );
