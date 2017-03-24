@@ -66,19 +66,19 @@
 
 	var _home = __webpack_require__(247);
 
-	var _other = __webpack_require__(256);
+	var _other = __webpack_require__(254);
 
-	var _emperor = __webpack_require__(257);
+	var _emperor = __webpack_require__(255);
 
 	var _emperor2 = _interopRequireDefault(_emperor);
 
-	var _api = __webpack_require__(260);
+	var _api = __webpack_require__(258);
 
-	var _router = __webpack_require__(261);
+	var _router = __webpack_require__(259);
 
 	var _router2 = _interopRequireDefault(_router);
 
-	var _backbone = __webpack_require__(262);
+	var _backbone = __webpack_require__(260);
 
 	var _backbone2 = _interopRequireDefault(_backbone);
 
@@ -110,7 +110,8 @@
 		_reactDom2.default.render(_react2.default.createElement(
 			_layout2.default,
 			null,
-			_react2.default.createElement(_emperor2.default, { id: id,
+			_react2.default.createElement(_emperor2.default, {
+				id: id,
 				api: api })
 		), document.getElementById('app'));
 	});
@@ -27221,10 +27222,6 @@
 
 	var _results = __webpack_require__(251);
 
-	var _getQueryString = __webpack_require__(254);
-
-	var _getQueryString2 = _interopRequireDefault(_getQueryString);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27256,12 +27253,14 @@
 			var usp = new URLSearchParams(window.location.search);
 
 			var criteria = Object.assign({}, defaultCriteria);
+
 			for (var c in criteria) {
 				if (usp.has(c)) {
-					criteria[c] = defaultCriteria[c];
+					criteria[c] = usp.get(c);
 				}
 			}
 
+			console.log('criteria', criteria);
 			_this.state = {
 				results: [],
 
@@ -27290,9 +27289,6 @@
 		}
 
 		_createClass(Home, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {}
-		}, {
 			key: 'handleDynastyChange',
 			value: function handleDynastyChange(event) {
 				this.updateQueryString('dynasty', event.target.value);
@@ -27708,50 +27704,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-
-	var _decamelize = __webpack_require__(255);
-
-	var _decamelize2 = _interopRequireDefault(_decamelize);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (criteria) {
-		var queryParams = ['sortBy', 'dynasty', 'yearFrom', 'yearTo'];
-
-		return queryParams.reduce(function (memo, key, index) {
-			var amper = index > 0 ? '&' : '';
-			return memo + amper + (0, _decamelize2.default)(key, '-') + '=' + criteria[key];
-		}, '');
-	};
-
-/***/ },
-/* 255 */
-/***/ function(module, exports) {
-
-	'use strict';
-	module.exports = function (str, sep) {
-		if (typeof str !== 'string') {
-			throw new TypeError('Expected a string');
-		}
-
-		sep = typeof sep === 'undefined' ? '_' : sep;
-
-		return str
-			.replace(/([a-z\d])([A-Z])/g, '$1' + sep + '$2')
-			.replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + sep + '$2')
-			.toLowerCase();
-	};
-
-
-/***/ },
-/* 256 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
 	exports.Other = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -27792,7 +27744,7 @@
 	}(_react2.default.Component);
 
 /***/ },
-/* 257 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27807,7 +27759,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _emperor = __webpack_require__(258);
+	var _emperor = __webpack_require__(256);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27856,13 +27808,13 @@
 	exports.default = Emperor;
 
 /***/ },
-/* 258 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(259);
+	var content = __webpack_require__(257);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -27882,7 +27834,7 @@
 	}
 
 /***/ },
-/* 259 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(3)();
@@ -27898,7 +27850,7 @@
 	};
 
 /***/ },
-/* 260 */
+/* 258 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27942,7 +27894,7 @@
 	}();
 
 /***/ },
-/* 261 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27953,7 +27905,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _backbone = __webpack_require__(262);
+	var _backbone = __webpack_require__(260);
 
 	var _backbone2 = _interopRequireDefault(_backbone);
 
@@ -27994,7 +27946,7 @@
 	exports.default = Router;
 
 /***/ },
-/* 262 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {//     Backbone.js 1.3.3
@@ -28013,7 +27965,7 @@
 
 	  // Set up Backbone appropriately for the environment. Start with AMD.
 	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(263), __webpack_require__(264), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(261), __webpack_require__(262), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
 	      // Export global even in AMD case in case this script is loaded with
 	      // others that may still expect a global Backbone.
 	      root.Backbone = factory(root, exports, _, $);
@@ -29921,7 +29873,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 263 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -31475,7 +31427,7 @@
 
 
 /***/ },
-/* 264 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!

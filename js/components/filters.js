@@ -4,9 +4,7 @@ import { menu, rangeFilters } from '../../styles/filters.scss';
 export class Filters extends React.Component {
 
 	constructor(props) {
-
 		super(props);
-
 	}
 
 	handleYearFromChange() {
@@ -29,24 +27,24 @@ export class Filters extends React.Component {
 					<li className={ rangeFilters }>
 						<label htmlFor='year-from'>from</label>
 						<input id='year-from'
-									 type='number'
-									 ref={(input) => this.yearFromInput = input}
-									 defaultValue={ this.props.criteria.yearFrom}
-									 min={ this.props.criteria.minYear }
-									 max={ this.props.criteria.maxYear }
-									 onBlur={ this.handleYearFromChange.bind(this) }
-									 />
+							 type='number'
+							 ref={(input) => this.yearFromInput = input}
+							 defaultValue={ this.props.criteria.yearFrom}
+							 min={ this.props.criteria.minYear }
+							 max={ this.props.criteria.maxYear }
+							 onBlur={ this.handleYearFromChange.bind(this) }
+							 />
 					</li>
 					<li className={ rangeFilters }>
 						<label htmlFor='year-to'>to</label>
 						<input id='year-to'
-									 type='number'
-									 ref={(input) => this.yearToInput = input}
-									 defaultValue={ this.props.criteria.yearTo }
-									 min={ this.props.criteria.minYear }
-									 max={ this.props.criteria.maxYear }
-									 onBlur={ this.handleYearToChange.bind(this) }
-									 />
+							 type='number'
+							 ref={(input) => this.yearToInput = input}
+							 defaultValue={ this.props.criteria.yearTo }
+							 min={ this.props.criteria.minYear }
+							 max={ this.props.criteria.maxYear }
+							 onBlur={ this.handleYearToChange.bind(this) }
+							 />
 					</li>
 				</ul>
 				<h4 htmlFor='dynasties'>Dynasty</h4>

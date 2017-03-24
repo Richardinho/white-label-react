@@ -40,7 +40,8 @@ router.registerRoute('emperor/:id', function (id) {
 
 	ReactDOM.render(
 	  <Layout>
-		  <Emperor id={id}
+		  <Emperor
+		  	id={id}
 			api={ api } />
 	  	</Layout>,
 	  document.getElementById('app')

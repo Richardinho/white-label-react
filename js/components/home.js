@@ -2,7 +2,6 @@ import React from 'react';
 import { aside, content } from '../../styles/layout.scss';
 import { Filters } from './filters';
 import { Results } from './results';
-import getQueryStringFromModel from '../get-query-string';
 
 export class Home extends React.Component {
 
@@ -23,9 +22,10 @@ export class Home extends React.Component {
 		let usp = new URLSearchParams(window.location.search);
 
 		let criteria = Object.assign({}, defaultCriteria);
+
 		for(let c in criteria) {
 			if(usp.has(c)) {
-				criteria[c] = defaultCriteria[c];
+				criteria[c] = usp.get(c);
 			}
 		}
 
@@ -58,11 +58,6 @@ export class Home extends React.Component {
 		this.handleSortOrderChange = this.handleSortOrderChange.bind(this);
 		this.handleYearFromChange = this.handleYearFromChange.bind(this);
 		this.handleYearToChange = this.handleYearToChange.bind(this);
-	}
-
-	componentDidMount() {
-
-
 	}
 
 	handleDynastyChange (event) {
