@@ -1,22 +1,58 @@
-import {Link} from 'react-router';
 import React from 'react';
 import { aside, content } from '../../styles/layout.scss';
-import emperorAPI from '../emperor-api';
-import store from '../store';
-import { connect } from 'react-redux';
-import resultsAction from '../results-action';
-import criteriaActions from '../criteria-actions';
-import Filters from './filters';
-import Results from './results';
+import { Filters } from './filters';
+import { Results } from './results';
 import getQueryStringFromModel from '../get-query-string';
 
-class Home extends React.Component {
+export class Home extends React.Component {
 
 	toFlag = true;
 
-	constructor () {
+	constructor (props) {
+		super(props);
 
-		super();
+		let defaultCriteria = {
+			minYear : -50,
+			maxYear : 300,
+			yearFrom : 69,
+			yearTo : 234,
+			dynasty : 'all',
+			sortBy : 'reign-asc'
+		};
+
+		let usp = new URLSearchParams(window.location.search);
+
+		let criteria = Object.assign({}, defaultCriteria);
+		for(let c in criteria) {
+			if(usp.has(c)) {
+				criteria[c] = defaultCriteria[c];
+			}
+		}
+
+		this.state = {
+			results : [],
+
+			criteria : criteria,
+
+			sortingOrders : [
+
+			],
+			dynasties : [
+
+			]
+		};
+
+		let queryString = '?' + usp.toString();
+        this.props.router.update(queryString);
+
+		this.props.api.fetchEmperors(queryString).then((data) => {
+			this.setState({
+				results : data.results,
+				dynasties : data.criteria.dynasties,
+				sortingOrders : data.criteria.sortingOrders
+			});
+
+		});
 
 		this.handleDynastyChange = this.handleDynastyChange.bind(this);
 		this.handleSortOrderChange = this.handleSortOrderChange.bind(this);
@@ -26,68 +62,61 @@ class Home extends React.Component {
 
 	componentDidMount() {
 
-		/*
-			We need to get the query params here, then we need to load accordingly.
-		*/
 
-		emperorAPI.load(window.location.search).then( data => {
-
-			store.dispatch(criteriaActions.initial(data.criteria));
-			store.dispatch(resultsAction(data.results));
-		});
 	}
 
 	handleDynastyChange (event) {
-		store.dispatch(criteriaActions.dynasty(event.target.value));
-		this.updateResults();
+		this.updateQueryString('dynasty', event.target.value);
 	}
 
 	handleSortOrderChange (event) {
-		store.dispatch(criteriaActions.sortOrder(event.target.value));
-		this.updateResults();
+		this.updateQueryString('sortBy', event.target.value);
 	}
 
-	handleYearFromChange (event) {
-		console.log('handler year from', event.target.value);
-		store.dispatch(criteriaActions.yearFrom(event.target.value));
-		this.updateResults();
+	handleYearFromChange (year) {
+		this.updateQueryString('yearFrom', year);
 	}
 
-	handleYearToChange (event) {
-		store.dispatch(criteriaActions.yearTo(event.target.value));
-		this.updateResults();
+	handleYearToChange (year) {
+		this.updateQueryString('yearTo', year);
 	}
 
-	updateResults() {
-
-		let queryString = getQueryStringFromModel(store.getState().criteriaState);
-		window.location.search = queryString;
+	updateQueryString(key, value) {
+		let criteria = this.state.criteria;
+		criteria[key] = value;
+		this.setState({'criteria' :  criteria });
+		let usp = new URLSearchParams();
+		for(let c in criteria) {
+			usp.set(c, criteria[c]);
+		}
+		let queryString = '?' + usp.toString();
+		this.props.router.update(queryString);
+		this.props.api.fetchEmperors(queryString).then((data) => {
+			this.setState({ results : data.results });
+		});
 	}
 
 	render () {
+
 		return (
 			<div className='clearfix'>
 				<div className={ aside }>
 					<Filters
-						{ ...this.props.criteria }
-						handleYearFromChange={this.handleYearFromChange}
-						handleYearToChange={this.handleYearToChange}
-						handleDynastyChange={this.handleDynastyChange}
-						handleSortOrderChange={this.handleSortOrderChange}/>
+						criteria = {            this.state.criteria}
+						dynasties = {           this.state.dynasties }
+						sortingOrders = {       this.state.sortingOrders }
+						handleYearFromChange={  this.handleYearFromChange}
+						handleYearToChange={    this.handleYearToChange}
+						handleDynastyChange={   this.handleDynastyChange}
+						handleSortOrderChange={ this.handleSortOrderChange}/>
 				</div>
 				<div className={ content }>
-					<Results results={ this.props.results } />
+					<Results router={this.props.router} results={ this.state.results } />
 				</div>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = function(store) {
-	return {
-		results: store.resultState.results,
-		criteria : store.criteriaState
-	};
-};
 
-export default connect(mapStateToProps)(Home);
+

@@ -1,5 +1,4 @@
 import React from 'react';
-import emperorAPI from '../emperor-api';
 import { emperorArticle } from '../../styles/emperor.scss';
 
 export default class Emperor extends React.Component {
@@ -11,18 +10,15 @@ export default class Emperor extends React.Component {
         this.state = {
             data : ''
         };
-    }
 
-	componentDidMount() {
-
-		let id = this.props.params.id;
-		emperorAPI.loadEmperor(id).then( data => {
+		let id = this.props.id;
+		this.props.api.fetchEmperor(id).then( data => {
 
 			this.setState({
 				data: data
 			});
 		});
-	}
+    }
 
 	render () {
 		return (

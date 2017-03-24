@@ -1,12 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router';
 import { searchResultItem, addInfo } from '../../styles/results.scss';
 
 let createUrl = (id) => {
 	return 'https://white-label-elements.herokuapp.com/images/medium/' + id + '.jpg';  //  use  ES2015 template
 }
 
-export default class Results extends React.Component {
+export class Results extends React.Component {
+
+	onClick(event) {
+		event.preventDefault();
+		this.props.router.navigate(event.currentTarget.getAttribute('href'));
+	}
 
 	render () {
 		return (
@@ -14,7 +18,7 @@ export default class Results extends React.Component {
 				{this.props.results.map((result) => {
 					return (
 						<li key={ result.id }>
-							<Link to={ "/emperor/" + result.id }>
+							<a onClick={this.onClick.bind(this)} href={ 'emperor/' + result.id }>
 								<div className={[searchResultItem, 'media'].join(' ')}>
 									<div className='media-image'>
 										<img alt="" src={ createUrl(result.id)}/>
@@ -25,7 +29,7 @@ export default class Results extends React.Component {
 										</div>
 									</div>
 								</div>
-							</Link>
+							</a>
 						</li>
 					)
 				})}

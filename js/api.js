@@ -1,16 +1,16 @@
 
 let apiURL = '/api';
 
-class EmperorAPI {
+export class API {
 
-	load (queryString = '') {
+	fetchEmperors(queryString = '') {
 
 		return fetch(apiURL + '/emperors' + queryString).then(function (response) {
 			return response.json()
 		});
 	}
 
-	loadEmperor (id) {
+	fetchEmperor (id) {
 
 		return fetch(apiURL + '/emperor?id=' + id).then(function (response) {
 			return response.text();
@@ -19,4 +19,3 @@ class EmperorAPI {
 	}
 }
 
-export default new EmperorAPI();

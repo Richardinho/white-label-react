@@ -69,17 +69,17 @@ function createEmperorFileName (id) {
 }
 
 function getYearFrom(request) {
-	var yearFrom = request.param('year-from');
+	var yearFrom = request.param('yearFrom');
 	return yearFrom ? yearFrom : defaultParams['year-from'];
 }
 
 function getYearTo(request) {
-	var yearTo = request.param('year-to');
+	var yearTo = request.param('yearTo');
 	return yearTo ? yearTo : defaultParams['year-to'];
 }
 
 function getSortOption (request) {
-	var sortBy = request.param('sort-by');
+	var sortBy = request.param('sortBy');
 	return sortBy ? sortBy : 'succession';
 }
 
