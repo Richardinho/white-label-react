@@ -23,6 +23,7 @@ let config = {
 };
 
 app.get('*', function (req, res) {
+	console.log('SERVING INDEX');
   res.render('index', config);
 });
 
